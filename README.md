@@ -10,13 +10,12 @@ A starter app using a pretty typical NodeJs stack w/ a postgreSql backend. Below
 - run "gulp db:migrate"
 - start the web server using "npm start"
 
-## Build w/ Gulp & Webpack
-- Using gulp for compiling sass instead of webpack because I do not want the css to have a dependency on javascript. The webpack way of doing css involves requiring as part of the js, which just seems silly to me.
-- Gulp task for building w/ webpack and webpack watch using the gulp-webpack-build package.
+## Build w/ npm & Webpack
+- Using npm for compiling sass instead of webpack because I do not want the css to have a dependency on javascript.
 - Webpack is used to build the js and publish to public/js/app.js
 -- eslint loader uses .eslintrc file for configuration to run linting on build
 -- babel is used for jsx compiling and ES6 features
-- eslint is run server side with gulp task using eslint-server.json as config
+- eslint is run server side with npm task
 
 ## Express
 - server.js is the entry point

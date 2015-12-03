@@ -23,7 +23,8 @@
     "no-use-before-define": 0,
     "new-cap": 0,
     "strict": 0,
-    "func-names": 0
+    "func-names": 0,
+    "default-case": 0
   },
   "plugins": [
     "react"

@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "npm run eslint:server && webpack --watch && npm run watch:css && nodemon server.js",
+    "watch": "webpack --watch && npm run watch:css",
+    "start-dev": "npm run eslint:server && nodemon server.js",
     "eslint:server": "eslint models routes server.js",
     "build": "webpack && npm run eslint:server && npm run build-css",
     "build:css": "node-sass --include-path scss front-end/src/scss/app.scss public/css/app.css",

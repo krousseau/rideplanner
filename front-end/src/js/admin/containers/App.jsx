@@ -7,7 +7,7 @@ import masterReducer from '../reducers';
 
 const finalCreateStore = compose(
   applyMiddleware(thunk),
-  window.devToolsExtension ? window.devToolsExtension : f => f
+  window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 const store = finalCreateStore(masterReducer);
 

@@ -31,6 +31,11 @@ module.exports = function(app, passport) {
 
   router.use(ensureAuthenticated);
 
+  router.route('/')
+    .get(mustbe.authorized(Securables.viewCompanies, function(req, res) {
+      res.render('reactApp');
+    }));
+
   router.route('/companies')
     .get(mustbe.authorized(Securables.viewCompanies, function(req, res) {
       Company.findAll()
@@ -55,16 +60,19 @@ module.exports = function(app, passport) {
 
   router.route('/rides')
     .get(function(req, res) {
-      res.send([{
-        id: 1,
-        start: {
-          longitude: 100,
-          latitude: 120,
-          name: 'Dorset Park'
-        },
-        length: 60,
-        unit: 'mi'
-      }]);
+      res.send(
+        {1: {
+          id: 1,
+          name: 'TNW',
+          startDate: new Date(),
+          start: {
+            longitude: 100,
+            latitude: 120,
+            name: 'Dorset Park'
+          },
+          length: 60,
+          unit: 'mi'
+        }});
     });
 
   return router;

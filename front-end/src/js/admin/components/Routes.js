@@ -6,8 +6,10 @@ import Users from 'components/UserList.jsx';
 
 
 export default (
-  <Route component={App}>
-    <Route path="/" component={Home}/>
-    <Route path="/users" component={Users}/>
-  </Route>
+  <Router>
+    <Route path="/" component={App}>
+      <IndexRoute component={Home}/>
+      <Route path="/users" component={Users}/>
+    </Route>
+  </Router>
 );

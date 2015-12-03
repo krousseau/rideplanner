@@ -4,11 +4,11 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { Router, Route, IndexRoute } from 'react-router';
 import masterReducer from '../reducers';
-import Rides from './Rides.jsx';
+import RidesList from './RidesList.jsx';
 
 const finalCreateStore = compose(
   applyMiddleware(thunk),
-  window.devToolsExtension ? window.devToolsExtension : f => f
+  window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 const store = finalCreateStore(masterReducer);
 
@@ -16,8 +16,11 @@ export default class RideApp extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router path="/" component={AppShell}>
-          <IndexRoute component={Rides}/>
+        <Router>
+          <Route path="/" component={AppShell}>
+            <IndexRoute component={RidesList}/>
+            <Route path="/rides" component={RidesList}/>
+          </Route>
         </Router>
       </Provider>
     );
