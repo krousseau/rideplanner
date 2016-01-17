@@ -1,10 +1,10 @@
 'use strict';
 
-let Sequelize = require('sequelize');
-let UserRole  = require('./UserRole');
+const Sequelize = require('sequelize');
+const UserRole = require('./UserRole');
 
 module.exports = function(sequelize, DataTypes) {
-  let User = sequelize.define('user', {
+  const User = sequelize.define('user', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -35,7 +35,7 @@ module.exports = function(sequelize, DataTypes) {
     {
       classMethods: {
         associate: function(models) {
-          User.hasMany(models.userRole, {as: 'UserRoles'});
+          User.hasMany(models.userRole, { as: 'UserRoles' });
         }
       }
     });

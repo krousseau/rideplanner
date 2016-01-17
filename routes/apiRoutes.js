@@ -1,12 +1,12 @@
 'use strict';
 
-let express    = require('express');
-let models     = require('../models');
-let Securables = require('../config/securables');
-let mustbe     = require('mustbe').routeHelpers();
+const express = require('express');
+const models = require('../models');
+const Securables = require('../config/securables');
+const mustbe = require('mustbe').routeHelpers();
 
 /*eslint-disable*/
-let router  = express.Router();
+const router  = express.Router();
 /*eslint-enable*/
 
 // These routes all route to /api/
@@ -26,10 +26,10 @@ function ensureAuthenticated(req, res, next) {
 
 module.exports = function(app, passport) {
   // models
-  let User    = models.user;
-  let Company = models.company;
+  const User = models.user;
+  const Company = models.company;
 
-  router.use(ensureAuthenticated);
+  // router.use(ensureAuthenticated);
 
   router.route('/')
     .get(mustbe.authorized(Securables.viewCompanies, function(req, res) {
@@ -61,18 +61,20 @@ module.exports = function(app, passport) {
   router.route('/rides')
     .get(function(req, res) {
       res.send(
-        {1: {
-          id: 1,
-          name: 'TNW',
-          startDate: new Date(),
-          start: {
-            longitude: 100,
-            latitude: 120,
-            name: 'Dorset Park'
-          },
-          length: 60,
-          unit: 'mi'
-        }});
+        {
+          1: {
+            id: 1,
+            name: 'TNW',
+            startDate: new Date(),
+            start: {
+              longitude: 100,
+              latitude: 120,
+              name: 'Dorset Park'
+            },
+            length: 60,
+            unit: 'mi'
+          }
+        });
     });
 
   return router;

@@ -1,6 +1,6 @@
 'use strict';
 
-let msgConstants = require('../config/messageConstants');
+const msgConstants = require('../config/messageConstants');
 
 // Simple route middleware to ensure user is authenticated.
 //   Use this route middleware on any resource that needs to be protected.  If
@@ -18,11 +18,13 @@ function ensureAuthenticated(req, res, next) {
 module.exports = function(app, passport) {
   // --------------------------------- GETS --------------------------------------
 
-  app.get('/', ensureAuthenticated, function(req, res) {
+  // app.get('/', ensureAuthenticated, function(req, res) {
+  app.get('/', function(req, res) {
     res.render('reactApp');
   });
 
-  app.get('/admin', ensureAuthenticated, function(req, res) {
+  // app.get('/admin', ensureAuthenticated, function(req, res) {
+  app.get('/admin', function(req, res) {
     res.render('adminApp');
   });
 
@@ -43,7 +45,8 @@ module.exports = function(app, passport) {
     res.redirect('/login');
   });
 
-  app.get('/unauthorized', ensureAuthenticated, function(req, res) {
+  // app.get('/unauthorized', ensureAuthenticated, function(req, res) {
+  app.get('/unauthorized', function(req, res) {
     res.render('unauthorized');
   });
 

@@ -1,16 +1,16 @@
 'use strict';
 
-let express        = require('express');
-let passport       = require('passport');
-let passportConfig = require('./config/passport');
-let bodyParser     = require('body-parser');
-let flash          = require('connect-flash');
-let path           = require('path');
-let session        = require('express-session');
-let LocalStrategy  = require('passport-local').Strategy;
-let mustBe         = require('mustbe');
+const express = require('express');
+const passport = require('passport');
+const passportConfig = require('./config/passport');
+const bodyParser = require('body-parser');
+const flash = require('connect-flash');
+const path = require('path');
+const session = require('express-session');
+const LocalStrategy = require('passport-local').Strategy;
+const mustBe = require('mustbe');
 
-let app = express();
+const app = express();
 
 app.set('port', process.env.PORT || 5000);
 
@@ -23,12 +23,12 @@ app.use(session({
 }));
 
 app.use(flash());
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-passportConfig(app, passport);
+// app.use(passport.initialize());
+// app.use(passport.session()); // persistent login sessions
+// passportConfig(app, passport);
 
 // set up mustbe
-let mustBeConfig = require('./config/mustBeConfig');
+const mustBeConfig = require('./config/mustBeConfig');
 mustBe.configure(mustBeConfig);
 
 // configure body-parser
@@ -47,7 +47,7 @@ app.disable('x-powered-by');
 
 require('./routes/accountRoutes')(app, passport);
 
-let apiRoutes = require('./routes/apiRoutes')(app, passport);
+const apiRoutes = require('./routes/apiRoutes')(app, passport);
 app.use('/api', apiRoutes);
 
 app.listen(app.get('port'), function() {

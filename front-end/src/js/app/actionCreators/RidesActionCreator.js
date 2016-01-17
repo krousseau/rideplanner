@@ -22,8 +22,8 @@ function requestRidesError(error, errorType) {
   return {
     type: Actions.FETCH_RIDES_FAILURE,
     payload: {
-      error: error,
-      errorType: errorType
+      error,
+      errorType
     }
   };
 }

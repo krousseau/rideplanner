@@ -1,12 +1,12 @@
 'use strict';
 
-let fs        = require('fs');
-let path      = require('path');
-let Sequelize = require('sequelize');
-let env       = process.env.NODE_ENV || 'development';
-let config    = require(__dirname + '/../config/config.json')[env];
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
+const env = process.env.NODE_ENV || 'development';
+const config = require(__dirname + '/../config/config.json')[env];
 let sequelize = null;
-let db        = {};
+const db = {};
 
 if (process.env.DATABASE_URL) {
   // the application is executed on Heroku ... use the postgres database
@@ -22,7 +22,7 @@ fs
     return (file.indexOf('.') !== 0) && (file !== 'index.js');
   })
   .forEach(function(file) {
-    let model = sequelize.import(path.join(__dirname, file));
+    const model = sequelize.import(path.join(__dirname, file));
     db[model.name] = model;
   });
 
