@@ -12,7 +12,7 @@ A starter app using a pretty typical NodeJs stack w/ a postgreSql backend. Below
 
 ## Build w/ npm & Webpack
 - Using npm for compiling sass instead of webpack because I do not want the css to have a dependency on javascript.
-- Webpack is used to build the js and publish to public/js/app.js
+- Webpack is used to build the js and publish to dist directory
 -- eslint loader uses .eslintrc file for configuration to run linting on build
 -- babel is used for jsx compiling and ES6 features
 - eslint is run server side with npm task

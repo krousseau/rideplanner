@@ -6,7 +6,6 @@ import PureComponent from 'react-pure-render/component';
 import { selectRideState } from '../domain/ridesDomain';
 
 class Rides extends PureComponent {
-
   componentDidMount() {
     const { dispatch, rides } = this.props;
 
@@ -17,7 +16,7 @@ class Rides extends PureComponent {
   }
 
   render() {
-    const { dispatch, enterpriseContext, rides } = this.props;
+    const { dispatch, rides } = this.props;
     return (<div>
       {this.props.children}
     </div>);

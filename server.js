@@ -14,7 +14,23 @@ const app = express();
 
 app.set('port', process.env.PORT || 5000);
 
-app.use(express.static(path.join(__dirname, 'public')));
+// (function() {
+// Step 1: Create & configure a webpack compiler
+const webpack = require('webpack');
+const webpackConfig = require('./webpack.config');
+const compiler = webpack(webpackConfig);
+
+// Step 2: Attach the dev middleware to the compiler & the server
+app.use(require('webpack-dev-middleware')(compiler, {
+  noInfo: true,
+  publicPath: webpackConfig.output.publicPath
+}));
+
+// Step 3: Attach the hot middleware to the compiler & the server
+app.use(require('webpack-hot-middleware')(compiler));
+// })();
+
+app.use(express.static(path.join(__dirname, 'dist')));
 
 app.use(session({
   secret: 'somesecrethere',

@@ -12,12 +12,12 @@ class RidesList extends Component {
     const { rides } = this.props;
     const ridesList = rides.toList().map(ride => {
       const id = ride.get('id');
-      return (<Ride key={id} id={id} name={ride.get('name')} />);
+      return (<Ride key={id} id={id} name={ride.get('name')} startDate={ride.get('startDate')} />);
     });
 
     return (<div>
       <h2>Rides</h2>
-      {ridesList}
+      <ul>{ridesList}</ul>
     </div>);
   }
 }
