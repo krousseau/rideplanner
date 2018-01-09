@@ -1,5 +1,3 @@
-var Promise = require('bluebird');
-
 function createUserRolesTable(migration, DataTypes){
     return migration.createTable(
         'userRoles',

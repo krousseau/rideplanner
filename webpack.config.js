@@ -1,13 +1,11 @@
-var webpack      = require('webpack');
-var path         = require('path');
-var node_modules = path.resolve(__dirname, 'node_modules');
+const webpack = require('webpack');
+const path = require('path');
 
-var hotMiddlewareScript = 'webpack-hot-middleware/client';
-var config = {
+const config = {
   entry: {
     // Add the client which connects to our middleware
-    app: [hotMiddlewareScript, './front-end/src/js/app/app.js'],
-    admin: [hotMiddlewareScript, './front-end/src/js/admin/admin.js']
+    app: './front-end/src/js/app/app.js',
+    admin: './front-end/src/js/admin/admin.js'
   },
   output: {
     path: path.join(__dirname, 'dist', 'js'),
@@ -15,24 +13,30 @@ var config = {
     publicPath: '/static/js/'
   },
   module: {
-    noParse: [],
-    loaders: [
-        {
-          test: /\.jsx?$/,
-          exclude: [node_modules],
-          loaders: ['babel-loader', 'eslint-loader']   // ES6 and jsx compiling
-        }
-      ]
+    rules: [
+      {
+        test: /\.jsx?$/,
+        use: ['babel-loader', 'eslint-loader'],
+        include: path.join(__dirname, 'front-end', 'src', 'js'),
+        exclude: [/node_modules/, /react-rte.js/]
+      }
+    ]
   },
   devtool: '#source-map',
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.js'
+    }),
+    new webpack.NamedChunksPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
 
-    // Following 3 are for hot reloading
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
-  ]
+    new webpack.optimize.ModuleConcatenationPlugin()
+  ],
+  resolve: {
+    extensions: ['.json', '.js', '.jsx']
+  }
 };
 
 // Dev only
@@ -40,20 +44,20 @@ var config = {
 // );
 
 // Production optimizations
- // plugins = plugins.concat(
- //     new webpack.DefinePlugin({
- //         'process.env': {
- //             // This has effect on the react lib size
- //             'NODE_ENV': JSON.stringify('production')
- //         }
- //     }),
- //     new webpack.optimize.DedupePlugin(),
- //     new webpack.optimize.OccurenceOrderPlugin(true),
- //     new webpack.optimize.UglifyJsPlugin(),
- //     new SaveAssetsJson({
- //         path: path.resolve('../static/')
- //     })
- // );
+// plugins = plugins.concat(
+//     new webpack.DefinePlugin({
+//         'process.env': {
+//             // This has effect on the react lib size
+//             'NODE_ENV': JSON.stringify('production')
+//         }
+//     }),
+//     new webpack.optimize.DedupePlugin(),
+//     new webpack.optimize.OccurenceOrderPlugin(true),
+//     new webpack.optimize.UglifyJsPlugin(),
+//     new SaveAssetsJson({
+//         path: path.resolve('../static/')
+//     })
+// );
 
 // The minified files to use for development so webpack does not need to go in
 // and recompile these every time. This should not be in our prod configuration...
