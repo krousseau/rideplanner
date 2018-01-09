@@ -3,35 +3,38 @@
 const Sequelize = require('sequelize');
 
 module.exports = function(sequelize, DataTypes) {
-  const Ride = sequelize.define('ride', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
+  const Ride = sequelize.define(
+    'ride',
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+      },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      latitude: {
+        type: DataTypes.FLOAT,
+        allowNull: true
+      },
+      longitude: {
+        type: DataTypes.FLOAT,
+        allowNull: true
+      }
     },
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    latitude: {
-      type: DataTypes.FLOAT,
-      allowNull: true
-    },
-    longitude: {
-      type: DataTypes.FLOAT,
-      allowNull: true
-    }
-  },
     {
       classMethods: {
         // associate: function(models) {
         //   // Ride.hasMany(models.user, {as: 'Users'});
         // }
       }
-    });
+    }
+  );
   return Ride;
 };

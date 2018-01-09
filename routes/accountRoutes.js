@@ -7,6 +7,7 @@ const msgConstants = require('../config/messageConstants');
 //   the request is authenticated (typically via a persistent login session),
 //   the request will proceed.  Otherwise, the user will be redirected to the
 //   login page.
+/* eslint-disable consistent-return */
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
@@ -14,6 +15,7 @@ function ensureAuthenticated(req, res, next) {
 
   res.redirect('/login');
 }
+/* eslint-enable consistent-return */
 
 module.exports = function(app, passport) {
   // --------------------------------- GETS --------------------------------------
@@ -52,15 +54,21 @@ module.exports = function(app, passport) {
 
   // --------------------------------- POSTS -------------------------------------
 
-  app.post('/registerUser', passport.authenticate('local-signup', {
-    successRedirect: '/',         // redirect to the home page
-    failureRedirect: '/register', // redirect back to the register page if there is an error
-    failureFlash: true
-  }));
+  app.post(
+    '/registerUser',
+    passport.authenticate('local-signup', {
+      successRedirect: '/', // redirect to the home page
+      failureRedirect: '/register', // redirect back to the register page if there is an error
+      failureFlash: true
+    })
+  );
 
-  app.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/',         // redirect to the home page
-    failureRedirect: '/login',    // redirect back to the login page if there is an error
-    failureFlash: true
-  }));
+  app.post(
+    '/login',
+    passport.authenticate('local-login', {
+      successRedirect: '/', // redirect to the home page
+      failureRedirect: '/login', // redirect back to the login page if there is an error
+      failureFlash: true
+    })
+  );
 };
