@@ -14,7 +14,6 @@
     "react"
   ],
   "plugins": [
-    "react-hot-loader/babel",
     "transform-decorators-legacy",
     "transform-function-bind",
     "transform-class-properties",
