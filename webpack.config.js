@@ -16,7 +16,10 @@ const config = {
     rules: [
       {
         test: /\.jsx?$/,
-        use: ['babel-loader', 'eslint-loader'],
+        use: [
+          'babel-loader', 
+          // 'eslint-loader'
+        ],
         include: path.join(__dirname, 'front-end', 'src', 'js'),
         exclude: [/node_modules/, /react-rte.js/]
       }

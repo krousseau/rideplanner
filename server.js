@@ -1,14 +1,16 @@
 'use strict';
 
+const cors = require('cors');
 const express = require('express');
 const passport = require('passport');
-const passportConfig = require('./config/passport');
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
 const path = require('path');
 const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
 const mustBe = require('mustbe');
+
+const passportConfig = require('./config/passport');
 
 const app = express();
 
@@ -20,11 +22,15 @@ const webpack = require('webpack');
 const webpackConfig = require('./webpack.config');
 const compiler = webpack(webpackConfig);
 
+app.use(cors());
+
 // Step 2: Attach the dev middleware to the compiler & the server
-app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: true,
-  publicPath: webpackConfig.output.publicPath
-}));
+app.use(
+  require('webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath
+  })
+);
 
 // Step 3: Attach the hot middleware to the compiler & the server
 app.use(require('webpack-hot-middleware')(compiler));
@@ -32,11 +38,13 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 app.use(express.static(path.join(__dirname, 'dist')));
 
-app.use(session({
-  secret: 'somesecrethere',
-  saveUninitialized: true,
-  resave: true
-}));
+app.use(
+  session({
+    secret: 'somesecrethere',
+    saveUninitialized: true,
+    resave: true
+  })
+);
 
 app.use(flash());
 // app.use(passport.initialize());

@@ -33,6 +33,7 @@
     "body-parser": "^1.18.2",
     "config": "^1.29.0",
     "connect-flash": "^0.1.1",
+    "cors": "^2.8.4",
     "debug": "^3.1.0",
     "del": "^3.0.0",
     "eslint": "^4.15.0",
@@ -71,7 +72,18 @@
     "type": "git",
     "url": "https://github.com/krousseau/rideplanner.git"
   },
-  "keywords": ["node", "heroku", "express", "postgres", "mustbe", "sequelize", "passportJs", "react"],
+  "keywords": [
+    "node",
+    "heroku",
+    "express",
+    "postgres",
+    "mustbe",
+    "sequelize",
+    "passportJs",
+    "react"
+  ],
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {
+    "prop-types": "^15.6.0"
+  }
 }
